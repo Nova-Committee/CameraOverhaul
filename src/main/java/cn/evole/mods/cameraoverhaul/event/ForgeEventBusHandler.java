@@ -54,12 +54,11 @@ public class ForgeEventBusHandler {
         double deltaTime = event.getRenderPartialTicks();
 
         Vec3d vec3d = projectViewFromEntity(entity, deltaTime);
-        Transform cameraTransform = new Transform(vec3d, new Vec3d(pitch, yaw, 0d));
+        Transform cameraTransform = new Transform(vec3d, new Vec3d(pitch, yaw, roll));
 
         Vec3d velocity = new Vec3d(entity.motionX, entity.motionY, entity.motionZ);
         Vec2f relativeXZVelocity = Vec2fUtils.Rotate(new Vec2f((float) velocity.x, (float) velocity.z), 360f - (float) cameraTransform.rotation.y);
 
-        prevCameraYaw = cameraTransform.rotation.y;
 
         //X
         VerticalVelocityPitchOffset(velocity, deltaTime, config.verticalVelocityPitchFactor);
@@ -68,6 +67,7 @@ public class ForgeEventBusHandler {
         YawDeltaRollOffset(cameraTransform, deltaTime, config.yawDeltaRollFactor);
         StrafingRollOffset(relativeXZVelocity, deltaTime, config.strafingRollFactor);
 
+        prevCameraYaw = cameraTransform.rotation.y;
 
         event.setPitch((float)(pitch + offsetTransform.rotation.x));
         event.setYaw((float)(yaw + offsetTransform.rotation.y));
