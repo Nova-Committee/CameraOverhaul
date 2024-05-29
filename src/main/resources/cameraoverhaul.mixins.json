@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "cn.evole.mods.cameraoverhaul.mixin",
+  "minVersion": "0.8",
+  "refmap": "cameraoverhaul.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
